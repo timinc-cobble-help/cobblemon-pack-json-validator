@@ -18,7 +18,7 @@ function App() {
     validateJsonsInZip(file)
       .then((res) => {
         if (!running) return
-        setResults(res.sort((a, b) => a.valid - b.valid))
+        setResults(res?.sort((a, b) => a.valid - b.valid))
       })
     return () => {
       running = false

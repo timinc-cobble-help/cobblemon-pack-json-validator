@@ -1,4 +1,5 @@
 import JSZip from 'jszip';
+import validate from "./jsonutil"
 
 const validateJsonsInZip = async (file) => {
     if (!file) return Promise.resolve(null);
@@ -17,7 +18,7 @@ const validateJsonsInZip = async (file) => {
                     if (filename.endsWith('.json')) {
                         const fileContent = await loadedZip.file(filename).async('string');
                         try {
-                            JSON.parse(fileContent);
+                            validate(fileContent);
                             newResults.push({ filename, valid: true, error: null });
                         } catch (err) {
                             newResults.push({ filename, valid: false, error: err.message });
